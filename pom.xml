@@ -12,6 +12,8 @@
 
     <modules>
         <module>wsw-cloud-order-service</module>
+        <module>wsw-cloud-account-service</module>
+        <module>wsw-cloud-storage-service</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
