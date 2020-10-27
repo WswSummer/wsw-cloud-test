@@ -22,5 +22,5 @@ public interface OrderMapper {
      * @param userId
      * @param status
      */
-    void update(@Param("userId") Integer userId, @Param("status") Integer status);
+    void update(@Param("userId") Long userId, @Param("status") Integer status);
 }
