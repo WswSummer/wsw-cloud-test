@@ -8,7 +8,7 @@ spring:
     cloud:
         nacos:
             discovery:
-                server-addr: localhost:8848  # ÅäÖÃnacosµØÖ·
+                server-addr: localhost:8848  # é…ç½®nacosåœ°å€
 
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
