@@ -9,6 +9,19 @@ spring:
         nacos:
             discovery:
                 server-addr: localhost:8848  # 配置nacos地址
+        sentinel:
+            transport:
+                dashboard: localhost:9090  # sentinel dashboard地址
+                port: 8719  # sentinel api port
+            # sentinel配置持久化
+            datasource:
+                ds1:
+                    nacos:
+                        server-addr: localhost:8848
+                        dataId: wsw-cloud-order-service
+                        groupId: DEFAULT_GROUP
+                        data-type: json
+                        rule-type: flow
 
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
@@ -20,3 +33,9 @@ spring:
 mybatis:
     mapper-locations: classpath:mapper/*.xml
     type-aliases-package: com.wsw.cloudtest.domain
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
