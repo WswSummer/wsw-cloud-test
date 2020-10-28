@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>wsw-cloud-api-commons</module>
         <module>wsw-cloud-order-service</module>
         <module>wsw-cloud-account-service</module>
         <module>wsw-cloud-storage-service</module>
