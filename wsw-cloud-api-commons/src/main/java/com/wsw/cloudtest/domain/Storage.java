@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @Author WangSongWen
  * @Date: Created in 17:20 2020/10/27
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Storage {
+public class Storage implements Serializable {
     private Long id;
     private Long productId;
     private Integer total;
