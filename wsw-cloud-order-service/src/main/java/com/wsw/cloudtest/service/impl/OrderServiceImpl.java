@@ -1,6 +1,6 @@
 package com.wsw.cloudtest.service.impl;
 
-import com.wsw.cloudtest.dao.OrderMapper;
+import com.wsw.cloudtest.mapper.OrderMapper;
 import com.wsw.cloudtest.domain.Order;
 import com.wsw.cloudtest.rabbitmq.RabbitService;
 import com.wsw.cloudtest.service.AccountService;

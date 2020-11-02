@@ -1,6 +1,6 @@
 package com.wsw.cloudtest.service.impl;
 
-import com.wsw.cloudtest.dao.AccountMapper;
+import com.wsw.cloudtest.mapper.AccountMapper;
 import com.wsw.cloudtest.service.AccountService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -1,4 +1,4 @@
-package com.wsw.cloudtest.dao;
+package com.wsw.cloudtest.mapper;
 
 import com.wsw.cloudtest.domain.Order;
 import org.apache.ibatis.annotations.Mapper;

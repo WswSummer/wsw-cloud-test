@@ -1,4 +1,4 @@
-package com.wsw.cloudtest.dao;
+package com.wsw.cloudtest.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -1,6 +1,6 @@
 package com.wsw.cloudtest.service.impl;
 
-import com.wsw.cloudtest.dao.StorageMapper;
+import com.wsw.cloudtest.mapper.StorageMapper;
 import com.wsw.cloudtest.service.StorageService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
