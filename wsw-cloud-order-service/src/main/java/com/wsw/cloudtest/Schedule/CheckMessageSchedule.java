@@ -30,7 +30,7 @@ public class CheckMessageSchedule {
         List<LocalMessage> failMessages = localMessageService.selectFailMessage(0);
         if (null != failMessages && !failMessages.isEmpty()){
             for (LocalMessage failMessage : failMessages) {
-                rabbitService.sendMessage(String.valueOf(failMessage.getLocalMessageId()), failMessage.getMessage());
+                rabbitService.sendMessage(failMessage.getLocalMessageId(), failMessage.getMessage());
             }
         }
     }
