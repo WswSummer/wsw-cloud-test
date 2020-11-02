@@ -8,5 +8,5 @@ import com.wsw.cloudtest.domain.Order;
  * @Description:
  */
 public interface OrderService {
-    void create(Order order);
+    void createOrder(Order order) throws Exception;
 }
