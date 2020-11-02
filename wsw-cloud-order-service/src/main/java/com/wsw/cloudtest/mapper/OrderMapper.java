@@ -15,7 +15,7 @@ public interface OrderMapper {
      * 新增订单
      * @param order
      */
-    void create(Order order);
+    int create(Order order);
 
     /**
      * 更改订单状态
