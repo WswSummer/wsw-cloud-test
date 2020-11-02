@@ -1,9 +1,12 @@
 package com.wsw.cloudtest.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.wsw.cloudtest.domain.LocalMessage;
 import com.wsw.cloudtest.mapper.OrderMapper;
 import com.wsw.cloudtest.domain.Order;
 import com.wsw.cloudtest.rabbitmq.RabbitService;
 import com.wsw.cloudtest.service.AccountService;
+import com.wsw.cloudtest.service.LocalMessageService;
 import com.wsw.cloudtest.service.OrderService;
 import com.wsw.cloudtest.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +29,28 @@ public class OrderServiceImpl implements OrderService {
     private StorageService storageService;
     @Autowired
     private RabbitService rabbitService;
+    @Autowired
+    private LocalMessageService localMessageService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void createOrder(Order order) throws Exception{
+    public void createOrder(Order order){
         // 1. 创建订单
-        orderMapper.create(order);
+        int result = orderMapper.create(order);
 
         // 向RabbitMQ中发消息
-        rabbitService.sendMessage(order);
+        String message = JSONObject.toJSONString(order);
+        if (result == 1){
+            // 本地消息表添加本地消息
+            LocalMessage localMessage = new LocalMessage();
+            localMessage.setLocalMessageId(order.getId());
+            localMessage.setMessage(message);
+            localMessage.setStatus(0);
+            localMessageService.insertLocalMessage(localMessage);
+
+            // 发消息
+            rabbitService.sendMessage(order.getId(), message);
+        }
 
         // 2. 减库存
         storageService.decrease(order.getProductId(), order.getCount());

@@ -18,7 +18,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/order/create")
-    public CommonResult testCreate(Order order) throws Exception {
+    public CommonResult testCreate(Order order) {
         orderService.createOrder(order);
         return new CommonResult(200, "订单创建成功");
     }
