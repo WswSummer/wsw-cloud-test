@@ -1,7 +1,5 @@
 package com.wsw.cloudtest.rabbitmq;
 
-import com.wsw.cloudtest.domain.LocalMessage;
-import com.wsw.cloudtest.domain.Order;
 import com.wsw.cloudtest.service.LocalMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -11,10 +9,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate.ConfirmCallback;
 import org.springframework.amqp.rabbit.core.RabbitTemplate.ReturnCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @Author WangSongWen
@@ -30,10 +24,7 @@ public class RabbitService implements ConfirmCallback, ReturnCallback {
     private LocalMessageService localMessageService;
 
     // 发送消息
-    public void sendMessage(Long localMessageId, String message) {
-        Map<String, Object> messageMap = new HashMap<>();
-        messageMap.put("messageId", UUID.randomUUID());
-        messageMap.put("Message", message);
+    public void sendMessage(Long localMessageId, Object message) {
         // 当Mandatory参数设为true时，如果目的不可达，会发送消息给生产者，生产者通过一个回调函数来获取该信息
         this.rabbitTemplate.setMandatory(true);
         // 确认回调
@@ -42,7 +33,7 @@ public class RabbitService implements ConfirmCallback, ReturnCallback {
         this.rabbitTemplate.setReturnCallback(this);
         // 用于确认之后更改本地消息状态或删除--本地消息id
         CorrelationData correlationData = new CorrelationData(String.valueOf(localMessageId));
-        rabbitTemplate.convertAndSend("fanoutExchange", messageMap, correlationData);
+        rabbitTemplate.convertAndSend("fanoutExchange", message, correlationData);
     }
 
     @Override

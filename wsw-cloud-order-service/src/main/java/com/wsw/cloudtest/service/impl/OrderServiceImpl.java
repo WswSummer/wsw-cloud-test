@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
             localMessageService.insertLocalMessage(localMessage);
 
             // 发消息
-            rabbitService.sendMessage(order.getId(), message);
+            rabbitService.sendMessage(order.getId(), order);
         }
 
         // 2. 减库存
