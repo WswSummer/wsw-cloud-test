@@ -1,7 +1,10 @@
 package com.wsw.cloudtest.mapper;
 
+import com.wsw.cloudtest.domain.Storage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Author WangSongWen
@@ -16,4 +19,8 @@ public interface StorageMapper {
      * @param count
      */
     void decrease(@Param("productId") Long productId, @Param("count") Integer count);
+
+    List<Storage> selectStorages();
+
+    Storage selectStorageById(Long id);
 }

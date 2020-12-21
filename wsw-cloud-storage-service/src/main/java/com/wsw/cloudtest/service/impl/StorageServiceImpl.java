@@ -1,6 +1,7 @@
 package com.wsw.cloudtest.service.impl;
 
 import com.rabbitmq.client.Channel;
+import com.wsw.cloudtest.domain.Storage;
 import com.wsw.cloudtest.mapper.StorageMapper;
 import com.wsw.cloudtest.service.StorageService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * @Author WangSongWen
@@ -24,21 +26,14 @@ public class StorageServiceImpl implements StorageService {
     @Autowired
     private StorageMapper storageMapper;
 
-    // 从RabbitMQ中接收消息
-    @RabbitListener(queues = "queueStorage")  // 监听的队列名称queueStorage
-    public void messageReceive(Channel channel, Message message){
-        String msg = new String(message.getBody(), StandardCharsets.UTF_8);
-        try {
-            log.info("wsw-cloud-storage-service接收到了消息: " + msg);
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void decrease(Long productId, Integer count) {
         storageMapper.decrease(productId, count);
+    }
+
+    @Override
+    public List<Storage> selectStorages() {
+        return storageMapper.selectStorages();
     }
 }

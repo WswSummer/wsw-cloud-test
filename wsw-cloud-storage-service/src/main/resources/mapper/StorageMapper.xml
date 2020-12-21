@@ -12,4 +12,12 @@
     <update id="decrease">
         update t_storage set used = used + #{count}, residue = residue - #{count} where product_id = #{productId}
     </update>
+
+    <select id="selectStorages" resultMap="BaseResultMap">
+        select * from t_storage
+    </select>
+
+    <select id="selectStorageById" resultMap="BaseResultMap">
+        select * from t_storage where id = #{id}
+    </select>
 </mapper>
